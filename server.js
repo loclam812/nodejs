@@ -10,7 +10,15 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 
-Mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+Mongoose
+  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('OK')
+  })
+  .catch(err => {
+    console.error(`Error: ${err}`)
+    process.exit()
+  })
 
 app.use(cors(corsOptions));
 app.use(BodyParser.urlencoded({ extended: true }))
