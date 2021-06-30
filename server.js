@@ -13,14 +13,18 @@ const corsOptions = {
 Mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(cors(corsOptions));
-app.use(BodyParser.json())
 app.use(BodyParser.urlencoded({ extended: true }))
+app.use(BodyParser.json())
 
 const Information = Mongoose.model("information", {
   data: Array
 });
 
-app.get('/get-information', async (req, res) => {
+app.get('/', (_, res) => {
+  res.send('Hello World')
+})
+
+app.get('/get-information', async (_, res) => {
   try {
     const result = await Information.find().exec()
 
